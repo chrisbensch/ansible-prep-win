@@ -13,8 +13,8 @@ foreach ($profile in $profiles) {
 
 
 # Set basic authentication and allow unencrypted messages (for testing purposes)
-winrm set winrm/config/service @{AllowUnencrypted="true"}
-winrm set winrm/config/service/auth @{Basic="true"}
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+winrm set winrm/config/service/auth '@{Basic="true"}'
 
 # Allow firewall rules for WinRM
 New-NetFirewallRule -Name "WinRM-HTTP" -DisplayName "WinRM HTTP" -Enabled True -Direction Inbound -Action Allow -Protocol TCP -LocalPort 5985
