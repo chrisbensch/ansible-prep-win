@@ -1,6 +1,17 @@
 # Configure WinRM for HTTP
 winrm quickconfig -q
 
+# Set all network connections to Private
+# Get all network connection profiles
+$profiles = Get-NetConnectionProfile
+
+# Iterate through each profile and set it to private
+foreach ($profile in $profiles) {
+    Set-NetConnectionProfile -NetworkCategory Private -InterfaceIndex $profile.InterfaceIndex
+}
+
+
+
 # Set basic authentication and allow unencrypted messages (for testing purposes)
 winrm set winrm/config/service @{AllowUnencrypted="true"}
 winrm set winrm/config/service/auth @{Basic="true"}
